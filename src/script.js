@@ -25,6 +25,10 @@ window.addEventListener('DOMContentLoaded', () => {
             }
             // イコールボタンが押された場合
             else if (value === '=') {
+                // 最初にイコールが入力された場合、受け付けない
+                if (display.textContent === '0') {
+                    return;
+                }
                 fetch(`/calculate.php?expression=${encodeURIComponent(display.textContent)}`)
                     .then(response => response.text())
                     .then(result => {
