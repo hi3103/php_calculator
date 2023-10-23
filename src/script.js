@@ -93,10 +93,10 @@ window.addEventListener('DOMContentLoaded', () => {
                     buttonValue = 'AC';
                     break;
                 case '/':
-                    buttonValue = '÷';
+                    buttonValue = '/';
                     break;
                 case '*':
-                    buttonValue = '×';
+                    buttonValue = '*';
                     break;
                 case '-':
                     buttonValue = '-';
