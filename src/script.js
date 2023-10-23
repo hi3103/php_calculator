@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
                     return;
                 }
-                fetch(`/calculate2.php?expression=${encodeURIComponent(display.textContent)}`)
+                fetch(`/calculate.php?expression=${encodeURIComponent(display.textContent)}`)
                     .then(response => {
                         if (!response.ok) {
                             // サーバーからのエラーレスポンスを処理
