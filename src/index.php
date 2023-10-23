@@ -35,6 +35,8 @@
         <button data-value="AC">AC</button>
     </div>
 
+    <div id="notice"></div>
+
 </div>
 
 </body>

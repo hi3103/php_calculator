@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
     // HTML要素を取得する
     const display = document.getElementById('display');
+    const notice = document.querySelector('#notice');
     const buttons = document.querySelectorAll('#calculator button');
 
     // 計算が完了したかのフラグ
@@ -18,6 +19,9 @@ window.addEventListener('DOMContentLoaded', () => {
             // 四則演算用の記号を定義
             const operators = ['+', '-', '*', '/'];
 
+            // エラーメッセージを初期化
+            notice.textContent = '';
+
             // ACボタンが押された場合
             if (value === 'AC') {
                 display.textContent = '0';
@@ -27,6 +31,11 @@ window.addEventListener('DOMContentLoaded', () => {
             else if (value === '=') {
                 // 最初にイコールが入力された場合、受け付けない
                 if (display.textContent === '0') {
+                    return;
+                }
+                // 最後が四則演算記号で終わっている場合、受け付けない
+                else if (operators.includes(lastChar)) {
+                    notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
                     return;
                 }
                 fetch(`/calculate.php?expression=${encodeURIComponent(display.textContent)}`)
