@@ -12,6 +12,12 @@ window.addEventListener('DOMContentLoaded', () => {
             // 押されたボタンの data-value 属性を取得
             const value = button.getAttribute('data-value');
 
+            // 表示されている最後の1文字を取得
+            const lastChar = display.textContent.slice(-1);
+
+            // 四則演算用の記号を定義
+            const operators = ['+', '-', '*', '/'];
+
             // ACボタンが押された場合
             if (value === 'AC') {
                 display.textContent = '0';
@@ -28,11 +34,25 @@ window.addEventListener('DOMContentLoaded', () => {
                     .catch(error => {
                         console.error('Error:', error);
                     });
-            } else {
+            }
+            // 数字が押された場合
+            else if (!isNaN(value)) {
                 if (isCalculationComplete || display.textContent === '0') {
-                    // 計算が完了している、または表示が0の場合は新しい数字でリセット
-                    display.textContent = value !== '0' ? value : '0'; // 0だけの入力でリセットしないように
+                    display.textContent = value;
                     isCalculationComplete = false; // 計算完了フラグをリセット
+                } else {
+                    display.textContent += value;
+                }
+            }
+            // 四則演算記号が押された場合
+            else if (operators.includes(value)) {
+                // 入力途中に演算子が2つ連続して入力された場合、最後の演算子を置き換える
+                if (operators.includes(lastChar)) {
+                    display.textContent = display.textContent.slice(0, -1) + value;
+                }
+                // 最初に演算子が入力された場合、受け付けない
+                else if (display.textContent === '0') {
+                    return;
                 } else {
                     display.textContent += value;
                 }
