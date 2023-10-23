@@ -32,4 +32,40 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // キーボードの入力を監視するイベントリスナー
+    document.addEventListener('keydown', event => {
+        const key = event.key;
+        let buttonValue;
+
+        if ('0' <= key && key <= '9') {
+            buttonValue = key;
+        } else {
+            switch (key) {
+                case 'Escape':
+                    buttonValue = 'AC';
+                    break;
+                case '/':
+                    buttonValue = '÷';
+                    break;
+                case '*':
+                    buttonValue = '×';
+                    break;
+                case '-':
+                    buttonValue = '-';
+                    break;
+                case '+':
+                    buttonValue = '+';
+                    break;
+                case 'Enter':
+                    buttonValue = '=';
+                    break;
+            }
+        }
+
+        if (buttonValue) {
+            const button = document.querySelector(`#calculator button[data-value="${buttonValue}"]`);
+            button.click();  // 対応するボタンのクリックイベントをトリガー
+        }
+    });
 });
