@@ -38,14 +38,21 @@ window.addEventListener('DOMContentLoaded', () => {
                     notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
                     return;
                 }
-                fetch(`/calculate.php?expression=${encodeURIComponent(display.textContent)}`)
-                    .then(response => response.text())
+                fetch(`/calculate2.php?expression=${encodeURIComponent(display.textContent)}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            // サーバーからのエラーレスポンスを処理
+                            throw new Error("サーバーエラーが発生しました。");
+                        }
+                        return response.text();
+                    })
                     .then(result => {
                         display.textContent = result;
                         isCalculationComplete = true; // 計算完了フラグをセット
                     })
                     .catch(error => {
                         console.error('Error:', error);
+                        notice.textContent = error.message;  // エラーメッセージを#noticeに表示
                     });
             }
             // 数字が押された場合
