@@ -93,6 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     buttonValue = 'AC';
                     break;
                 case '/':
+                    event.preventDefault(); // デフォルトの動作をキャンセル
                     buttonValue = '/';
                     break;
                 case '*':
