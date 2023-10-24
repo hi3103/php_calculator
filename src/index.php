@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/style.css">
 	<title>四則演算電卓</title>
-	<script src="script.js" defer></script>
+	<script src="js/script.js" defer></script>
 </head>
 <body>
 
