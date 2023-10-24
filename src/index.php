@@ -19,7 +19,11 @@
 		<div id="calculator">
 
 			<div id="notice"></div>
-			<div id="display">0</div>
+
+			<div class="display">
+				<div id="display-sub"></div>
+				<div id="display-main">0</div>
+			</div>
 
 			<!-- 数字のボタン -->
 			<div id="number-buttons">

@@ -115,7 +115,7 @@ body {
 	width: fit-content;
 	display: grid;
 	grid-template-columns: ($btn-width*3 + $btn-gap*2) $btn-width;
-	grid-template-rows: $btn-height/2 $btn-height $btn-height ($btn-height*4 + $btn-gap*3);
+	grid-template-rows: $btn-height/2 $btn-height*1.5 $btn-height ($btn-height*4 + $btn-gap*3);
 	grid-template-areas:
 		"notice notice"
 		"display display"
@@ -127,12 +127,26 @@ body {
 }
 
 //計算式出力エリア
-#display {
+.display{
 	grid-area: display;
-
+	display: flex;
+	flex-direction: column;
+}
+#display-sub {
 	display: inline-flex;
-	height: 3.75rem;
-	padding: 0.625rem;
+	height: $btn-height/2;
+	padding: 0 0.625rem;
+	align-items: flex-end;
+
+	background: $mono-07-pale-gray;
+	color: $mono-01-black;
+
+	font-size: .875rem;
+}
+#display-main {
+	display: inline-flex;
+	height: $btn-height;
+	padding: 0 0.625rem;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-end;
@@ -141,9 +155,6 @@ body {
 	color: $mono-01-black;
 
 	font-size: 1.5rem;
-	font-style: normal;
-	font-weight: 400;
-	line-height: normal;
 }
 
 //メッセージ出力エリア

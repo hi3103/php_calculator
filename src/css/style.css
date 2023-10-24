@@ -51,27 +51,39 @@ body {
   width: fit-content;
   display: grid;
   grid-template-columns: 12.5rem 3.75rem;
-  grid-template-rows: 1.875rem 3.75rem 3.75rem 16.875rem;
+  grid-template-rows: 1.875rem 5.625rem 3.75rem 16.875rem;
   grid-template-areas: "notice notice" "display display" "function-buttons formula-buttons" "number-buttons formula-buttons";
   gap: 0.625rem;
   padding: 0.625rem;
   background: #ffffff;
 }
 
-#display {
+.display {
   grid-area: display;
+  display: flex;
+  flex-direction: column;
+}
+
+#display-sub {
+  display: inline-flex;
+  height: 1.875rem;
+  padding: 0 0.625rem;
+  align-items: flex-end;
+  background: #eeeeee;
+  color: #000000;
+  font-size: 0.875rem;
+}
+
+#display-main {
   display: inline-flex;
   height: 3.75rem;
-  padding: 0.625rem;
+  padding: 0 0.625rem;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
   background: #eeeeee;
   color: #000000;
   font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 }
 
 #notice {

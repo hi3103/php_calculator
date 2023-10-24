@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
 	// HTML要素を取得する
-	const display = document.getElementById('display');
+	const displayMain = document.getElementById('display-main');
+	const displaySub = document.getElementById('display-sub');
 	const notice = document.querySelector('#notice');
 	const buttons = document.querySelectorAll('#calculator button');
 
@@ -14,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			const value = button.getAttribute('data-value');
 
 			// 表示されている最後の1文字を取得
-			const lastChar = display.textContent.slice(-1);
+			const lastChar = displayMain.textContent.slice(-1);
 
 			// 四則演算用の記号を定義
 			const operators = ['+', '-', '*', '/'];
@@ -24,13 +25,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			// ACボタンが押された場合
 			if (value === 'AC') {
-				display.textContent = '0';
+				displayMain.textContent = '0';
 				isCalculationComplete = false; // 計算完了フラグをリセット
 			}
 			// イコールボタンが押された場合
 			else if (value === '=') {
 				// 最初にイコールが入力された場合、受け付けない
-				if (display.textContent === '0') {
+				if (displayMain.textContent === '0') {
 					return;
 				}
 				// 最後が四則演算記号で終わっている場合、受け付けない
@@ -38,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
 					return;
 				}
-				fetch(`../calculate.php?expression=${encodeURIComponent(display.textContent)}`)
+				fetch(`../calculate.php?expression=${encodeURIComponent(displayMain.textContent)}`)
 					.then(response => {
 						if (!response.ok) {
 							// サーバーからのエラーレスポンスを処理
@@ -47,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
 						return response.text();
 					})
 					.then(result => {
-						display.textContent = result;
+						displayMain.textContent = result;
 						isCalculationComplete = true; // 計算完了フラグをセット
 					})
 					.catch(error => {
@@ -57,24 +58,24 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 			// 数字が押された場合
 			else if (!isNaN(value)) {
-				if (isCalculationComplete || display.textContent === '0') {
-					display.textContent = value;
+				if (isCalculationComplete || displayMain.textContent === '0') {
+					displayMain.textContent = value;
 					isCalculationComplete = false; // 計算完了フラグをリセット
 				} else {
-					display.textContent += value;
+					displayMain.textContent += value;
 				}
 			}
 			// 四則演算記号が押された場合
 			else if (operators.includes(value)) {
 				// 入力途中に演算子が2つ連続して入力された場合、最後の演算子を置き換える
 				if (operators.includes(lastChar)) {
-					display.textContent = display.textContent.slice(0, -1) + value;
+					displayMain.textContent = displayMain.textContent.slice(0, -1) + value;
 				}
 				// 最初に演算子が入力された場合、受け付けない
-				else if (display.textContent === '0') {
+				else if (displayMain.textContent === '0') {
 					return;
 				} else {
-					display.textContent += value;
+					displayMain.textContent += value;
 				}
 			}
 		});
