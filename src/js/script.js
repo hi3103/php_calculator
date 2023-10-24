@@ -8,6 +8,26 @@ window.addEventListener('DOMContentLoaded', () => {
 	// 計算が完了したかのフラグ
 	let isCalculationComplete = false;
 
+	// 計算処理を関数として定義
+	function executeCalculation(expression) {
+		fetch(`../calculate.php?expression=${encodeURIComponent(expression)}`)
+			.then(response => {
+				if (!response.ok) {
+					// サーバーからのエラーレスポンスを処理
+					throw new Error("サーバーエラーが発生しました。");
+				}
+				return response.text();
+			})
+			.then(result => {
+				displayMain.textContent = result;
+				isCalculationComplete = true; // 計算完了フラグをセット
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				notice.textContent = error.message; // エラーメッセージを#noticeに表示
+			});
+	}
+
 	// ボタンクリックイベント処理
 	buttons.forEach(button => {
 		button.addEventListener('click', () => {
@@ -39,22 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
 					return;
 				}
-				fetch(`../calculate.php?expression=${encodeURIComponent(displayMain.textContent)}`)
-					.then(response => {
-						if (!response.ok) {
-							// サーバーからのエラーレスポンスを処理
-							throw new Error("サーバーエラーが発生しました。");
-						}
-						return response.text();
-					})
-					.then(result => {
-						displayMain.textContent = result;
-						isCalculationComplete = true; // 計算完了フラグをセット
-					})
-					.catch(error => {
-						console.error('Error:', error);
-						notice.textContent = error.message;  // エラーメッセージを#noticeに表示
-					});
+				executeCalculation(displayMain.textContent);
 			}
 			// 数字が押された場合
 			else if (!isNaN(value)) {
