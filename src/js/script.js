@@ -8,6 +8,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	// 計算が完了したかのフラグ
 	let isCalculationComplete = false;
 
+	// 計算式を保存しておく変数
+	let tempFormula = '';
+
 	// 計算処理を関数として定義
 	function executeCalculation(expression) {
 		fetch(`../calculate.php?expression=${encodeURIComponent(expression)}`)
@@ -34,8 +37,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			// 押されたボタンの data-value 属性を取得
 			const value = button.getAttribute('data-value');
 
-			// 表示されている最後の1文字を取得
-			const lastChar = displayMain.textContent.slice(-1);
+			// 計算式の最後の1文字を取得
+			const lastChar = tempFormula.slice(-1);
 
 			// 四則演算用の記号を定義
 			const operators = ['+', '-', '*', '/'];
@@ -45,13 +48,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			// ACボタンが押された場合
 			if (value === 'AC') {
-				displayMain.textContent = '0';
+				displayMain.textContent = '0'; // ディスプレイをリセット
+				tempFormula = ''; // 計算式をリセット
 				isCalculationComplete = false; // 計算完了フラグをリセット
 			}
 			// イコールボタンが押された場合
 			else if (value === '=') {
 				// 最初にイコールが入力された場合、受け付けない
-				if (displayMain.textContent === '0') {
+				if (tempFormula === '') {
 					return;
 				}
 				// 最後が四則演算記号で終わっている場合、受け付けない
@@ -59,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
 					return;
 				}
-				executeCalculation(displayMain.textContent);
+				executeCalculation(tempFormula);
 			}
 			// 数字が押された場合
 			else if (!isNaN(value)) {
@@ -69,6 +73,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				} else {
 					displayMain.textContent += value;
 				}
+				tempFormula = displayMain.textContent;
 			}
 			// 四則演算記号が押された場合
 			else if (operators.includes(value)) {
@@ -77,11 +82,12 @@ window.addEventListener('DOMContentLoaded', () => {
 					displayMain.textContent = displayMain.textContent.slice(0, -1) + value;
 				}
 				// 最初に演算子が入力された場合、受け付けない
-				else if (displayMain.textContent === '0') {
+				else if (tempFormula === '') {
 					return;
 				} else {
 					displayMain.textContent += value;
 				}
+				tempFormula = displayMain.textContent;
 			}
 		});
 	});
