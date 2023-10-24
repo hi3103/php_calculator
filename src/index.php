@@ -1,12 +1,38 @@
+<?php
+function import_asset($filepath='',$type = ''){
+	// 変数を定義
+	$html = '';
+	$filepath_str = '';
+	$last_modified_time = 0;
+	//引数チェック
+	if (!empty($filepath) && !empty($type)) {
+		// ファイル更新日を取得
+		$last_modified_time = filemtime($filepath);
+		// 更新日時が取得できたら
+		if ($last_modified_time !== 0){
+			// href/srcに出力するパスを生成
+			$filepath_str = $filepath.'?v='.$last_modified_time;
+			// link/scriptタグを生成
+			if ($type==='css') {
+				$html = '<link rel="stylesheet" href="'.$filepath_str.'">'.PHP_EOL;
+			} elseif ($type==='js') {
+				$html = '<script src="'.$filepath_str.'" defer></script>'.PHP_EOL;
+			}
+		}
+	}
+	//出力
+	echo $html;
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/style.css">
+	<?php import_asset('css/reset.css','css'); ?>
+	<?php import_asset('css/style.css','css'); ?>
 	<title>四則演算電卓</title>
-	<script src="js/script.js" defer></script>
+	<?php import_asset('js/script.js','js'); ?>
 </head>
 <body>
 
