@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// 計算処理を関数として定義
 	function executeCalculation(expression) {
-		fetch(`../calculate.php?expression=${encodeURIComponent(expression)}`)
+		return fetch(`../calculate.php?expression=${encodeURIComponent(expression)}`)
 			.then(response => {
 				if (!response.ok) {
 					// サーバーからのエラーレスポンスを処理
@@ -21,14 +21,6 @@ window.addEventListener('DOMContentLoaded', () => {
 				}
 				return response.text();
 			})
-			.then(result => {
-				displayMain.textContent = result;
-				isCalculationComplete = true; // 計算完了フラグをセット
-			})
-			.catch(error => {
-				console.error('Error:', error);
-				notice.textContent = error.message; // エラーメッセージを#noticeに表示
-			});
 	}
 
 	// ボタンクリックイベント処理
@@ -49,6 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			// ACボタンが押された場合
 			if (value === 'AC') {
 				displayMain.textContent = '0'; // ディスプレイをリセット
+				displaySub.textContent = ''; // ディスプレイをリセット
 				tempFormula = ''; // 計算式をリセット
 				isCalculationComplete = false; // 計算完了フラグをリセット
 			}
@@ -63,32 +56,68 @@ window.addEventListener('DOMContentLoaded', () => {
 					notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
 					return;
 				}
-				executeCalculation(tempFormula);
+				executeCalculation(tempFormula)
+					.then(result => {
+						displaySub.textContent = tempFormula;
+						displayMain.textContent = result;
+						tempFormula = result;
+						console.log(tempFormula); // デバッグ用
+						isCalculationComplete = true; // 計算完了フラグをセット
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						notice.textContent = error.message;  // エラーメッセージを#noticeに表示
+					});
 			}
 			// 数字が押された場合
 			else if (!isNaN(value)) {
-				if (isCalculationComplete || displayMain.textContent === '0') {
+				// 新しく計算を始める場合
+				if (tempFormula === '') {
+					if (isCalculationComplete) {
+						isCalculationComplete = false; // 計算完了フラグをリセット
+					}
+					tempFormula = value;
 					displayMain.textContent = value;
-					isCalculationComplete = false; // 計算完了フラグをリセット
-				} else {
-					displayMain.textContent += value;
 				}
-				tempFormula = displayMain.textContent;
+				// 最後が四則演算記号で終わっている場合
+				else if (operators.includes(lastChar)) {
+					if (isCalculationComplete) {
+						isCalculationComplete = false; // 計算完了フラグをリセット
+					}
+					displayMain.textContent = value;
+					tempFormula += displayMain.textContent;
+				}
+				// 上記以外
+				else {
+					if (isCalculationComplete) {
+						isCalculationComplete = false; // 計算完了フラグをリセット
+						displaySub.textContent = ''; // サブディスプレイをリセット
+						tempFormula = value;
+						displayMain.textContent = value;
+					} else {
+						displayMain.textContent += value;
+						tempFormula = displayMain.textContent;
+					}
+				}
 			}
 			// 四則演算記号が押された場合
 			else if (operators.includes(value)) {
-				// 入力途中に演算子が2つ連続して入力された場合、最後の演算子を置き換える
-				if (operators.includes(lastChar)) {
-					displayMain.textContent = displayMain.textContent.slice(0, -1) + value;
-				}
 				// 最初に演算子が入力された場合、受け付けない
-				else if (tempFormula === '') {
+				if (tempFormula === '') {
 					return;
-				} else {
-					displayMain.textContent += value;
 				}
-				tempFormula = displayMain.textContent;
+				// 入力途中に演算子が2つ連続して入力された場合、最後の演算子を置き換える
+				else if (operators.includes(lastChar)) {
+					tempFormula = tempFormula.slice(0, -1) + value;
+					displaySub.textContent = tempFormula;
+				}
+				// 上記以外
+				else {
+					tempFormula += value;
+					displaySub.textContent = tempFormula;
+				}
 			}
+			console.log(tempFormula); // デバッグ用
 		});
 	});
 
