@@ -75,7 +75,7 @@ body {
 	font-size: 1.5rem;
 	text-align: center;
 	cursor: pointer;
-	
+
 	&:active {
 		transform: translateY(2px);
 	}
@@ -83,22 +83,25 @@ body {
 	&.btn-formula {
 		background: $color-primary-light;
 		color: $mono-01-black;
+
 		&:active {
 			border: 4px solid $color-emphasis;
 		}
 	}
-	
+
 	&.btn-number {
 		background: $greenish-mono-03-dark-gray;
 		color: $mono-08-white;
+
 		&:active {
 			border: 3px solid $color-emphasis;
 		}
 	}
-	
+
 	&.btn-function {
 		background: $greenish-mono-07-pale-gray-greenish;
 		color: $mono-01-black;
+
 		&:active {
 			border: 4px solid $color-emphasis;
 		}
@@ -125,17 +128,17 @@ body {
 //計算式出力エリア
 #display {
 	grid-area: display;
-	
+
 	display: inline-flex;
 	height: 3.75rem;
 	padding: 0.625rem;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-end;
-	
+
 	background: $mono-07-pale-gray;
 	color: $mono-01-black;
-	
+
 	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: 400;
