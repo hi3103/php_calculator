@@ -54,7 +54,8 @@ $breakpoints: (
 // ============================================= //
 html {
 	scroll-behavior: smooth;
-	background: $mono-05-gray;
+	background: $mono-07-pale-gray;
+	color: $mono-02-almost-black;
 }
 
 body {
@@ -180,4 +181,39 @@ body {
 	grid-template-columns: repeat(3, $btn-width);
 	grid-template-rows: repeat(1, $btn-height);
 	gap: $btn-gap;
+}
+
+// Page Setting
+// ============================================= //
+.wrapper{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100svh;
+	row-gap: 2em;
+}
+
+//ヘッダー
+#header{
+	h1{
+		font-size: 1.25rem;
+		font-weight: 700;
+	}
+}
+
+//フッター
+#footer{
+	p{
+		color: $mono-04-dark-gray;
+		font-size: .87em;
+		a{
+			color: $color-primary-dark;
+			border-bottom: 2px dotted $color-primary-dark;
+			&:hover{
+				text-decoration: none;
+				border-bottom-color: transparent;
+			}
+		}
+	}
 }
