@@ -1,0 +1,180 @@
+@charset "utf-8";
+// ========================================== //
+// PHP Calculator
+// Created: 2023-10-24
+// ========================================== //
+
+// Variables & Mixins
+// ============================================= //
+
+// Font Family
+$font_ja: "BIZ UDPGothic", "IBM Plex Sans JP", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+$font_en: "BIZ UDPGothic", "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, sans-serif;
+
+// Colors
+$mono-01-black: #000000;
+$mono-02-almost-black: #222222;
+$mono-03-grayish-black: #333333;
+$mono-04-dark-gray: #666666;
+$mono-05-gray: #999999;
+$mono-06-light-gray: #dddddd;
+$mono-07-pale-gray: #eeeeee;
+$mono-08-white: #ffffff;
+$greenish-mono-02-almost-black: #2c2d2d;
+$greenish-mono-03-dark-gray: #393e3e;
+$greenish-mono-04-dark-gray-greenish: #667777;
+$greenish-mono-05-gray-greenish: #99aaaa;
+$greenish-mono-06-light-gray: #bbcccc;
+$greenish-mono-07-pale-gray-greenish: #dbe4e4;
+$color-emphasis: #ffdd00;
+$color-primary-dark: #558888;
+$color-primary-light: #cceeee;
+$color-primary-normal: #99cccc;
+
+// Sizes
+$btn-width: 3.75rem;
+$btn-height: 3.75rem;
+$btn-gap: 0.625rem;
+
+// For Media Query
+$breakpoints: (
+	"sm": "screen and (min-width: 425px)",
+	"md": "screen and (min-width: 768px)",
+	"lg": "screen and (min-width: 1024px)",
+	"xl": "screen and (min-width: 1400px)",
+) !default;
+
+@mixin mq($breakpoint) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+
+// General
+// ============================================= //
+html {
+	scroll-behavior: smooth;
+	background: $mono-05-gray;
+}
+
+body {
+	color: $mono-01-black;
+	font-size: 16px;
+	font-family: $font_ja;
+	font-weight: 400;
+}
+
+// Buttons
+// ============================================= //
+.btn {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+	font-size: 1.5rem;
+	text-align: center;
+	cursor: pointer;
+	
+	&:active {
+		transform: translateY(2px);
+	}
+
+	&.btn-formula {
+		background: $color-primary-light;
+		color: $mono-01-black;
+		&:active {
+			border: 4px solid $color-emphasis;
+		}
+	}
+	
+	&.btn-number {
+		background: $greenish-mono-03-dark-gray;
+		color: $mono-08-white;
+		&:active {
+			border: 3px solid $color-emphasis;
+		}
+	}
+	
+	&.btn-function {
+		background: $greenish-mono-07-pale-gray-greenish;
+		color: $mono-01-black;
+		&:active {
+			border: 4px solid $color-emphasis;
+		}
+	}
+}
+
+// Layout
+// ============================================= //
+#calculator {
+	width: fit-content;
+	display: grid;
+	grid-template-columns: ($btn-width*3 + $btn-gap*2) $btn-width;
+	grid-template-rows: $btn-height/2 $btn-height $btn-height ($btn-height*4 + $btn-gap*3);
+	grid-template-areas:
+		"notice notice"
+		"display display"
+		"function-buttons formula-buttons"
+		"number-buttons formula-buttons";
+	gap: $btn-gap;
+	padding: $btn-gap;
+	background: $mono-08-white;
+}
+
+//計算式出力エリア
+#display {
+	grid-area: display;
+	
+	display: inline-flex;
+	height: 3.75rem;
+	padding: 0.625rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	
+	background: $mono-07-pale-gray;
+	color: $mono-01-black;
+	
+	font-size: 1.5rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+//メッセージ出力エリア
+#notice {
+	grid-area: notice;
+	display: flex;
+	width: 14.375rem;
+	height: 1.875rem;
+	align-items: center;
+	gap: 0.375rem;
+}
+
+//数字のボタン
+#number-buttons {
+	grid-area: number-buttons;
+	display: grid;
+	grid-template-columns: repeat(3, $btn-width);
+	grid-template-rows: repeat(4, $btn-height);
+	gap: $btn-gap;
+}
+
+//演算用のボタン
+#formula-buttons {
+	grid-area: formula-buttons;
+	display: grid;
+	grid-template-columns: repeat(1, $btn-width);
+	grid-template-rows: repeat(5, $btn-height);
+	gap: $btn-gap;
+}
+
+//その他操作用のボタン
+#function-buttons {
+	grid-area: function-buttons;
+	display: grid;
+	grid-template-columns: repeat(3, $btn-width);
+	grid-template-rows: repeat(1, $btn-height);
+	gap: $btn-gap;
+}
