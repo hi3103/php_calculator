@@ -11,6 +11,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	// 計算式を保存しておく変数
 	let tempFormula = '';
 
+	// 四則演算記号を定義
+	const operators = ['+', '-', '*', '/'];
+
 	// 計算処理を関数として定義
 	function executeCalculation(expression) {
 		return fetch(`calculate.php?expression=${encodeURIComponent(expression)}`)
@@ -31,9 +34,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			// 計算式の最後の1文字を取得
 			const lastChar = tempFormula.slice(-1);
-
-			// 四則演算用の記号を定義
-			const operators = ['+', '-', '*', '/'];
 
 			// エラーメッセージを初期化
 			notice.textContent = '';
