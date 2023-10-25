@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// 計算処理を関数として定義
 	function executeCalculation(expression) {
-		return fetch(`../calculate.php?expression=${encodeURIComponent(expression)}`)
+		return fetch(`calculate.php?expression=${encodeURIComponent(expression)}`)
 			.then(response => {
 				if (!response.ok) {
 					// サーバーからのエラーレスポンスを処理
