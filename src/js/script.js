@@ -15,8 +15,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	const operators = ['+', '-', '*', '/'];
 
 	// 計算処理を関数として定義
-	function executeCalculation(expression) {
-		return fetch(`calculate.php?expression=${encodeURIComponent(expression)}`)
+	const executeCalculation = () => {
+		return fetch(`calculate.php?expression=${encodeURIComponent(tempFormula)}`)
 			.then(response => {
 				if (!response.ok) {
 					// サーバーからのエラーレスポンスを処理
@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
 					return;
 				}
-				executeCalculation(tempFormula)
+				executeCalculation()
 					.then(result => {
 						displaySub.textContent = tempFormula;
 						displayMain.textContent = result;
