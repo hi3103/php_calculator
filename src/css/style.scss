@@ -63,6 +63,7 @@ body {
 	font-size: 16px;
 	font-family: $font_ja;
 	font-weight: 400;
+	-webkit-tap-highlight-color: rgba($color-emphasis, .8);
 }
 
 // Buttons

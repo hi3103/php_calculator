@@ -10,6 +10,7 @@ body {
   font-size: 16px;
   font-family: "BIZ UDPGothic", "IBM Plex Sans JP", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   font-weight: 400;
+  -webkit-tap-highlight-color: rgba(255, 221, 0, 0.8);
 }
 
 .btn {
