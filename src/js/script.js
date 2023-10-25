@@ -118,7 +118,7 @@ window.addEventListener('DOMContentLoaded', () => {
 						isCalculationComplete = false; // 計算完了フラグをリセット
 					}
 					displayMain.textContent = value;
-					tempFormula += displayMain.textContent;
+					tempFormula += value;
 				}
 				// 上記以外
 				else {
@@ -129,7 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
 						displayMain.textContent = value;
 					} else {
 						displayMain.textContent += value;
-						tempFormula = displayMain.textContent;
+						tempFormula += value;
 					}
 				}
 			}
@@ -144,8 +144,25 @@ window.addEventListener('DOMContentLoaded', () => {
 					tempFormula = tempFormula.slice(0, -1) + value;
 					displaySub.textContent = tempFormula;
 				}
+				// 既に計算式が入力されている場合、計算を実行する
+				else if (formulaChecker()) {
+					executeCalculation()
+						.then(result => {
+							displayMain.textContent = result;
+							tempFormula = result + value;
+							displaySub.textContent = tempFormula;
+							isCalculationComplete = true; // 計算完了フラグをセット
+						})
+						.catch(error => {
+							console.error('Error:', error);
+							notice.textContent = error.message;  // エラーメッセージを#noticeに表示
+						});
+				}
 				// 上記以外
 				else {
+					if (isCalculationComplete) {
+						isCalculationComplete = false; // 計算完了フラグをリセット
+					}
 					tempFormula += value;
 					displaySub.textContent = tempFormula;
 				}
