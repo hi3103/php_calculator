@@ -26,14 +26,20 @@ window.addEventListener('DOMContentLoaded', () => {
 			})
 	}
 
+	// 計算式の末尾が演算子で終わっているか判定する関数
+	const lastCharChecker = () => {
+		// 計算式の最後の1文字を取得
+		const lastChar = tempFormula.slice(-1);
+
+		// 正規表現用に演算子をエスケープ
+		return operators.includes(lastChar)
+	}
+
 	// ボタンクリックイベント処理
 	buttons.forEach(button => {
 		button.addEventListener('click', () => {
 			// 押されたボタンの data-value 属性を取得
 			const value = button.getAttribute('data-value');
-
-			// 計算式の最後の1文字を取得
-			const lastChar = tempFormula.slice(-1);
 
 			// エラーメッセージを初期化
 			notice.textContent = '';
@@ -52,7 +58,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					return;
 				}
 				// 最後が四則演算記号で終わっている場合、受け付けない
-				else if (operators.includes(lastChar)) {
+				else if (lastCharChecker()) {
 					notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
 					return;
 				}
@@ -80,7 +86,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					displayMain.textContent = value;
 				}
 				// 最後が四則演算記号で終わっている場合
-				else if (operators.includes(lastChar)) {
+				else if (lastCharChecker()) {
 					if (isCalculationComplete) {
 						isCalculationComplete = false; // 計算完了フラグをリセット
 					}
@@ -107,7 +113,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					return;
 				}
 				// 入力途中に演算子が2つ連続して入力された場合、最後の演算子を置き換える
-				else if (operators.includes(lastChar)) {
+				else if (lastCharChecker()) {
 					tempFormula = tempFormula.slice(0, -1) + value;
 					displaySub.textContent = tempFormula;
 				}
