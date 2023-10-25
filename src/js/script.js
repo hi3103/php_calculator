@@ -26,6 +26,27 @@ window.addEventListener('DOMContentLoaded', () => {
 			})
 	}
 
+	// 計算式が計算可能な文字列になっているか判定する関数
+	const formulaChecker = () => {
+		// 正規表現用に演算子をエスケープ
+		const escapedOperators = operators.map(op => {
+			if (['+', '*', '.', '?', '^', '$', '|', '(', ')', '[', ']', '{', '}', '\\'].includes(op)) {
+				return `\\${op}`;
+			} else {
+				return op;
+			}
+		}).join('|');
+
+		// 正規表現のパターン
+		const regexPattern = `^-?\\d+\\.?\\d*(${escapedOperators})-?\\d+\\.?\\d*$`;
+
+		// 正規表現のオブジェクトを生成
+		const regex = new RegExp(regexPattern);
+
+		// tempFormulaが指定のパターンにマッチするかチェック
+		return regex.test(tempFormula)
+	}
+
 	// 計算式の末尾が演算子で終わっているか判定する関数
 	const lastCharChecker = () => {
 		// 計算式の最後の1文字を取得
@@ -62,18 +83,21 @@ window.addEventListener('DOMContentLoaded', () => {
 					notice.textContent = "数字を入力してください。"; // ユーザーへのメッセージを表示
 					return;
 				}
-				executeCalculation()
-					.then(result => {
-						displaySub.textContent = tempFormula;
-						displayMain.textContent = result;
-						tempFormula = result;
-						console.log(tempFormula); // デバッグ用
-						isCalculationComplete = true; // 計算完了フラグをセット
-					})
-					.catch(error => {
-						console.error('Error:', error);
-						notice.textContent = error.message;  // エラーメッセージを#noticeに表示
-					});
+				// 計算可能なら実行
+				else if (formulaChecker()){
+					executeCalculation()
+						.then(result => {
+							displaySub.textContent = tempFormula;
+							displayMain.textContent = result;
+							tempFormula = result;
+							console.log(tempFormula); // デバッグ用
+							isCalculationComplete = true; // 計算完了フラグをセット
+						})
+						.catch(error => {
+							console.error('Error:', error);
+							notice.textContent = error.message;  // エラーメッセージを#noticeに表示
+						});
+				}
 			}
 			// 数字が押された場合
 			else if (!isNaN(Number(value))) {
