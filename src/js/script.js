@@ -59,9 +59,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	// ボタンクリックイベント処理
 	buttons.forEach(button => {
 		button.addEventListener('click', () => {
-			console.log(tempFormula); // デバッグ用
-			console.log(isCalculationComplete); // デバッグ用
-
 			// 押されたボタンの data-value 属性を取得
 			const value = button.getAttribute('data-value');
 
@@ -93,7 +90,6 @@ window.addEventListener('DOMContentLoaded', () => {
 							displaySub.textContent = tempFormula;
 							displayMain.textContent = result;
 							tempFormula = result;
-							console.log(tempFormula); // デバッグ用
 							isCalculationComplete = true; // 計算完了フラグをセット
 						})
 						.catch(error => {
@@ -167,8 +163,6 @@ window.addEventListener('DOMContentLoaded', () => {
 					displaySub.textContent = tempFormula;
 				}
 			}
-			console.log(tempFormula); // デバッグ用
-			console.log(isCalculationComplete); // デバッグ用
 		});
 	});
 
