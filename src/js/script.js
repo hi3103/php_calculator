@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', () => {
 					});
 			}
 			// 数字が押された場合
-			else if (!isNaN(value)) {
+			else if (!isNaN(Number(value))) {
 				// 新しく計算を始める場合
 				if (tempFormula === '') {
 					if (isCalculationComplete) {
