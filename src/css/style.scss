@@ -127,13 +127,13 @@ body {
 	background: $mono-08-white;
 }
 
-//計算式出力エリア
+//計算内容の出力エリア
 .display{
 	grid-area: display;
 	display: flex;
 	flex-direction: column;
 }
-#display-sub {
+#display-sub { //計算式用
 	display: inline-flex;
 	height: $btn-height/2;
 	padding: 0 0.625rem;
@@ -144,7 +144,7 @@ body {
 
 	font-size: .875rem;
 }
-#display-main {
+#display-main { //入力中の数字＆計算結果用
 	display: inline-flex;
 	height: $btn-height;
 	padding: 0 0.625rem;
