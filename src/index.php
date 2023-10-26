@@ -72,9 +72,9 @@ function import_asset($filepath='',$type = ''){
 			<div id="formula-buttons">
 				<button class="btn btn-formula" data-value="/">÷</button>
 				<button class="btn btn-formula" data-value="*">×</button>
-				<button class="btn btn-formula" data-value="-">-</button>
-				<button class="btn btn-formula" data-value="+">+</button>
-				<button class="btn btn-formula" data-value="=">=</button>
+				<button class="btn btn-formula" data-value="-">−</button>
+				<button class="btn btn-formula" data-value="+">＋</button>
+				<button class="btn btn-formula" data-value="=">＝</button>
 			</div>
 
 			<!-- その他操作用のボタン -->
