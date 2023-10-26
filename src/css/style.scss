@@ -8,8 +8,8 @@
 // ============================================= //
 
 // Font Family
-$font_ja: "BIZ UDPGothic", "IBM Plex Sans JP", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Meiryo UI", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-$font_en: "BIZ UDPGothic", "Open Sans", "Helvetica Neue", Helvetica, Arial, Verdana, Roboto, sans-serif;
+$font_ja: "BIZ UDPGothic", "メイリオ", Meiryo, sans-serif;
+$font_en: "Open Sans", "Helvetica Neue", Helvetica, Arial, Roboto, sans-serif;
 
 // Colors
 $mono-01-black: #000000;
@@ -206,6 +206,7 @@ body {
 //ヘッダー
 #header{
 	h1{
+		font-family: $font_en;
 		font-size: 1.25rem;
 		font-weight: 700;
 	}
@@ -214,6 +215,7 @@ body {
 //フッター
 #footer{
 	p{
+		font-family: $font_en;
 		color: $mono-04-dark-gray;
 		font-size: .87em;
 		a{

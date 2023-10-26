@@ -29,6 +29,9 @@ function import_asset($filepath='',$type = ''){
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 	<?php import_asset('css/reset.css','css'); ?>
 	<?php import_asset('css/style.css','css'); ?>
 	<title>四則演算電卓</title>
