@@ -19,6 +19,7 @@
 - Google Fonts
     - https://fonts.google.com/specimen/BIZ+UDPGothic
     - https://fonts.google.com/specimen/Open+Sans
+    - https://fonts.google.com/specimen/Roboto+Mono
 
 ### 動作確認済みOS・ブラウザ
 
