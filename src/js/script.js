@@ -100,6 +100,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 			// 数字が押された場合
 			else if (!isNaN(Number(value))) {
+				// 表示されている数値が0のときに0が入力された場合、受け付けない
+				if (displayMain.textContent === '0' && Number(value) === 0) {
+					return;
+				}
 				// 新しく計算を始める場合
 				if (tempFormula === '') {
 					if (isCalculationComplete) {
