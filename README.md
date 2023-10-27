@@ -99,7 +99,7 @@
 
 ### 使用ツール
 
-- [ChatGPT（GPT-4）](https://chat.openai.com/share/24858504-2df7-4fc3-a19a-ad7c5d8d1781)
+- [ChatGPT（GPT-4）](https://chat.openai.com/share/983f739b-24ea-4a4e-bfb8-2887daa13ae1)
 - PHPStorm
 - Sublime Merge
 
