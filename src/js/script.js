@@ -128,6 +128,11 @@ window.addEventListener('DOMContentLoaded', () => {
 						tempFormula = value;
 						displayMain.textContent = value;
 					} else {
+						// 最大10桁の制限を超えている場合、受け付けない
+						if (displayMain.textContent.length >= 10) {
+							notice.textContent = "入力制限があります（最大10桁まで）"; // ユーザーへのメッセージを表示
+							return;
+						}
 						displayMain.textContent += value;
 						tempFormula += value;
 					}
