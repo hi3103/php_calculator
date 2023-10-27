@@ -32,6 +32,7 @@ function import_asset($filepath='',$type = ''){
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap&text=0123456789" rel="stylesheet">
 	<?php import_asset('css/reset.css','css'); ?>
 	<?php import_asset('css/style.css','css'); ?>
 	<title>PHP Calculator</title>

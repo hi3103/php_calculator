@@ -10,6 +10,7 @@
 // Font Family
 $font_ja: "BIZ UDPGothic", "メイリオ", Meiryo, sans-serif;
 $font_en: "Open Sans", "Helvetica Neue", Helvetica, Arial, Roboto, sans-serif;
+$font_mono: "Roboto Mono", monospace;
 
 // Colors
 $mono-01-black: #000000;
@@ -132,6 +133,7 @@ body {
 	grid-area: display;
 	display: flex;
 	flex-direction: column;
+	font-family: $font_mono;
 }
 #display-sub { //計算式用
 	display: inline-flex;
@@ -142,7 +144,7 @@ body {
 	background: $mono-07-pale-gray;
 	color: $mono-01-black;
 
-	font-size: .875rem;
+	font-size: 1rem;
 }
 #display-main { //入力中の数字＆計算結果用
 	display: inline-flex;
@@ -155,7 +157,7 @@ body {
 	background: $mono-07-pale-gray;
 	color: $mono-01-black;
 
-	font-size: 1.5rem;
+	font-size: 2.5rem;
 }
 
 //メッセージ出力エリア
