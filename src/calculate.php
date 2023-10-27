@@ -1,7 +1,8 @@
 <?php
+// パラメータから計算式を取得
 $expression = $_GET['expression'] ?? '';
 
-// 簡易的なエラーハンドリング
+// 計算式が空の場合は処理を中断
 if (empty($expression)) {
 	echo "Error";
 	exit;
@@ -14,4 +15,3 @@ try {
 } catch (Throwable $e) {
 	echo "Error";
 }
-?>
