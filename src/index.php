@@ -34,7 +34,7 @@ function import_asset($filepath='',$type = ''){
 	<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 	<?php import_asset('css/reset.css','css'); ?>
 	<?php import_asset('css/style.css','css'); ?>
-	<title>四則演算電卓</title>
+	<title>PHP Calculator</title>
 	<?php import_asset('js/script.js','js'); ?>
 </head>
 <body>
