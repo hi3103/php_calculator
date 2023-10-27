@@ -35,6 +35,12 @@ try {
 			$result = $a/$b;
 		}
 
+		// 計算結果が10桁を超える場合、四捨五入を行う
+		if ($result!==null && strpos((string)$result,'.')!==false && strlen((string)$result) > 10) {
+			$precision = 10-(strpos((string)$result,'.')+1);
+			$result = round($result,$precision);
+		}
+
 		return $result;
 	}
 
