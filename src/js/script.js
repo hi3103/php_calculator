@@ -100,9 +100,20 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 			// 数字が押された場合
 			else if (!isNaN(Number(value))) {
-				// 表示されている数値が0のときに0が入力された場合、受け付けない
-				if (displayMain.textContent === '0' && Number(value) === 0) {
-					return;
+				// 0が入力された場合
+				if (Number(value) === 0) {
+					// 表示されている数値が0の場合、入力を受け付けない
+					if (displayMain.textContent === '0') {
+						return;
+					}
+					// 計算完了直後の場合、ACと同じ処理を実施する
+					else if(isCalculationComplete){
+						isCalculationComplete = false; // 計算完了フラグをリセット
+						displaySub.textContent = ''; // サブディスプレイをリセット
+						displayMain.textContent = '0';
+						tempFormula = '';
+						return;
+					}
 				}
 				// 新しく計算を始める場合
 				if (tempFormula === '') {
